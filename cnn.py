@@ -77,6 +77,7 @@ print(model.evaluate_generator(
     train_generator,
     steps = nb_train_samples // batch_size))
 
+
 #
 # model.fit_generator(
 #     train_generator,
