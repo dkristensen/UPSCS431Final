@@ -5,7 +5,7 @@ import numpy
 # The number of pixels we want our window to look at centered on the sealion
 EXAMPLE_SIZE = 64 # change to 128? to 40?
 # The fraction of each example size to overlap the window by
-OVERLAP = 1/2
+OVERLAP = 3/4
 
 # Gets the tuple locations of dots in the marked images
 def findDots(filename):

@@ -23,40 +23,40 @@ if K.image_data_format() == 'channels_first':
     input_shape = (3, img_width, img_height)
 else:
     input_shape = (img_width, img_height, 3)
-#
-# model = Sequential()
-# model.add(Conv2D(32, (3, 3), input_shape=input_shape))
-# a = Activation('relu')
-# model.add(a)
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-#
-# model.add(Conv2D(64, (3, 3)))
-# a = Activation('relu')
-# model.add(a)
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-#
-# model.add(Conv2D(128, (3, 3)))
-# a = Activation('relu')
-# model.add(a)
-# model.add(MaxPooling2D(pool_size=(2, 2)))
-#
-# model.add(Flatten())
-# model.add(Dense(256))
-# a = Activation('relu')
-# model.add(a)
-# model.add(Dense(128))
-# a = Activation('relu')
-# model.add(a)
-# model.add(Dense(1))
-# a = Activation('sigmoid')
-# model.add(a)
+
+model = Sequential()
+model.add(Conv2D(32, (3, 3), input_shape=input_shape))
+a = Activation('relu')
+model.add(a)
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(64, (3, 3)))
+a = Activation('relu')
+model.add(a)
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(128, (3, 3)))
+a = Activation('relu')
+model.add(a)
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Flatten())
+model.add(Dense(256))
+a = Activation('relu')
+model.add(a)
+model.add(Dense(128))
+a = Activation('relu')
+model.add(a)
+model.add(Dense(1))
+a = Activation('sigmoid')
+model.add(a)
 #
 # def fscore(y_true, y_pred):
 #     return (2*y_true*y_pred / (y_true+y_pred) )
 #
-# model.compile(loss='binary_crossentropy',
-#               optimizer='rmsprop',
-#               metrics=['accuracy'])
+model.compile(loss='binary_crossentropy',
+              optimizer='rmsprop',
+              metrics=['accuracy'])
 
 # # this is the augmentation configuration we will use for training
 train_datagen = ImageDataGenerator(
@@ -86,17 +86,17 @@ validation_generator = test_datagen.flow_from_directory(
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='binary')
-#
-# model.fit_generator(
-#     train_generator,
-#     steps_per_epoch=nb_train_samples // batch_size,
-#     epochs=epochs,
-#     validation_data=validation_generator,
-#     validation_steps=nb_validation_samples // batch_size)
-#
-currentModel = 'Binary_5C3H1O_80.h5'
-# model.save_weights('model_values/'+currentModel)
-# model.save('models/'+currentModel)
+
+model.fit_generator(
+    train_generator,
+    steps_per_epoch=nb_train_samples // batch_size,
+    epochs=epochs,
+    validation_data=validation_generator,
+    validation_steps=nb_validation_samples // batch_size)
+
+currentModel = 'Binary_3C3H2_64.h5'
+model.save_weights('model_values/'+currentModel)
+model.save('models/'+currentModel)
 model = load_model('models/'+currentModel)
 # print(model.metrics_names)
 # quit()
@@ -105,7 +105,6 @@ model = load_model('models/'+currentModel)
 #     steps = nb_train_samples // batch_size))
 
 def test_on_image(filename):
-    currentModel = 'Binary_5C3H1O_80.h5'
     model = load_model('models/'+currentModel)
     imageUsed = filename
     print(filename)
@@ -120,10 +119,3 @@ def test_on_image(filename):
     filename = filename.replace("Train/","")
     dotFinder.drawOutputGrid(batchVal, im, filename)
     return
-    # quit()
-    # for i in range(len(c)):
-    #     val = c[i]
-    #     # print(val)
-    #     if(val > 0.95 ):
-    #         a[i].save("positives/"+str(counter)+".jpg")
-    #     counter+=1

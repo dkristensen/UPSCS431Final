@@ -10,21 +10,21 @@
 \pdfinfo{
 /Title (Using a Convolution Neural Network in the Detection and Enumeration of Stellar Sea Lions from Aerial Photographs in the Western Aleutian Islands)
 /Author (Drew Kristensen, Patrick Ryan)}
-\setcounter{secnumdepth}{0}  
+\setcounter{secnumdepth}{0}
  \begin{document}
-% The file aaai.sty is the style file for AAAI Press 
+% The file aaai.sty is the style file for AAAI Press
 % proceedings, working notes, and technical reports.
 %
 \title{Using a Convolution Neural Network in the Detection and Enumeration of Stellar Sea Lions from Aerial Photographs in the Western Aleutian Islands}
 \author{
 Drew Kristensen \\
 University of Puget Sound\\
-dkristensen@pugetsound.edu 
+dkristensen@pugetsound.edu
 \And
 Patrick Ryan\\
 University of Puget Sound\\
 pryan@pugetsound.edu
-} 
+}
 
 \maketitle
 \begin{abstract}
@@ -33,20 +33,23 @@ We trained a convolution neural network on examples of both sea lions of all typ
 
 % motivates and describes the problem and the results at a high level.
 \section{Introduction}
-Currently, the NOAA has to employ technichions 
+Currently, the NOAA has to employ technicians to enumerate and categorize the sea lions that appear in the images. From this, the NOAA is able to track the status of the sea lion populations in the areas they are focused on. However, given the time sensitivity of these measures - as sea lions can move from location to location - we seek to tackle the problem of enumerating the sea lions in an image to assist the NOAA with their problem.
 
 % briefly describes existing work that solves the same (or similar) problem
 \section{Related Works}
-Similar projects have been undertaken to solve more general image recognition problems, such as solving the IMAGE-NET 
+Similar projects have been undertaken to solve more general image recognition problems, such as competing in the ILSVRC competition in 2012 to achieve first place in image recognition across 1000 classes.
 
 % explains any background information necessary to understand the problem or your approach.
 \section{Background}
-A convolutional neural network is a neural network the uses convolutional layers to increase the amount of data taken in and 
+A convolutional neural network is a neural network that uses convolution layers to alter the inputs in order to shift away from the original input and towards some useful translations that the networks can use. This limits the effects of random orientations of objects in images and increases the effectiveness of object classification.
+The training images were given as two sets of identical images except one set was marked with dots corresponding to each sea lion and its respective category. From this, we could extract examples of both the sea lions and the background from our dotted training directory.
 
 % provides the details of how you constructed your system, how it works, and how you tailored the algorithms described in the previous section to the problem at hand.
 \section{System Description}
-The network is composed of three convolution layers which are followed by pooling layers. This section provides our network with image transformations that have been proven to work well in generalizing images regradless of their 
-
+To create our CNN, we utilized the keras framework with a theano back end. This was the quickest, easiest way we found that could get us started early. The network is composed of three convolution layers which are followed by pooling layers. This section provides our network with image transformations that have been proven to work well in generalizing images regardless of their orientation - something that this project needed to be able to handle well, given that sea lions don't all align themselves to true north at all times. The network works by utilizing the convolution layers to transform the images in some way so that by the time the neurons in the network recieve input, the convolution layers have abstracted away from the original input and hopefully are left with patterns that the neurons can be trained to recognize.
+To feed the entire images into our network, we utilized the sliding window approach, wehre we itterate over the entire image selecting 64x64 pixel selections of the image and testing for sea lions within that small image. Once we get the result, we move the window 48 pixels over so we look at part of the previous image to ensure we don't miss any sea lions. This continues for the entire image and what returns back is an array of the locations where the network suspects a sea lion is.
+To extract examples of sea lions from the marked images, we set up a program that would crop 64x64 pixel images centered on the location of the marked dots from the dotted training images, but took the actual images from the clean images to keep the dots out of our examples. To extract examples of the background, we simply generated random x,y pairs that we compared to our list of sea lions that we found, and excluded any pairs that included a sea lion in the cropped image.
+We trained our network on both the small and a portion of the large dataset that the NOAA provided. From the small network, we found that it performed with 91\% accuracy on the test set.
 
 % describes how well the system performs. A format that often works well here is to first explain your evaluation techniques, provide their results, and then explain those results and what they say about the problem and about your approach(es) to it.
 \section{Results}
