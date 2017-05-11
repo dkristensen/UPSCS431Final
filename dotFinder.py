@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw
 import random
 import numpy
+import os
 
 # The number of pixels we want our window to look at centered on the sealion
 EXAMPLE_SIZE = 64 # change to 128? to 40?
@@ -44,9 +45,9 @@ def findDots(filename):
                 if(not inCurrentData(i,j,4, instances)):
                     instances[4].append((i,j))
     filename = filename.replace("TrainDotted/","")
-    # getNonExamples(filename, instances, 600)
-    # getCroppedExamples(filename, instances, classification)
-    saveMarkedImage(im, d, filename, classification, instances, colors)
+    getNonExamples(filename, instances, 400)
+    getCroppedExamples(filename, instances, classification)
+    # saveMarkedImage(im, d, filename, classification, instances, colors)
 
 # Checks to see if the x,y pair is within some range of another occurance
 # in the same instance. Serves the purpose of making sure a dot is only counted
@@ -162,3 +163,8 @@ def drawOutputGrid(results, im, id):
             if(results[countingValue] > 0.95):
                 d.rectangle(((i-padding), (j-padding), (i+padding), (j+padding)), fill = (255,255,255))
     im.save("Output"+id+".jpg")
+
+def getExamples():
+    filenames = os.listdir("TrainDotted")
+    for name in filenames:
+        findDots(name)
