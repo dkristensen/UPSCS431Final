@@ -1,0 +1,59 @@
+%File: formatting-instruction.tex
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\pdfinfo{
+/Title (Using a Convolution Neural Network in the Detection and Enumeration of Stellar Sea Lions from Aerial Photographs in the Western Aleutian Islands)
+/Author (Drew Kristensen, Patrick Ryan)}
+\setcounter{secnumdepth}{0}  
+ \begin{document}
+% The file aaai.sty is the style file for AAAI Press 
+% proceedings, working notes, and technical reports.
+%
+\title{Using a Convolution Neural Network in the Detection and Enumeration of Stellar Sea Lions from Aerial Photographs in the Western Aleutian Islands}
+\author{
+Drew Kristensen \\
+University of Puget Sound\\
+dkristensen@pugetsound.edu 
+\And
+Patrick Ryan\\
+University of Puget Sound\\
+pryan@pugetsound.edu
+} 
+
+\maketitle
+\begin{abstract}
+We trained a convolution neural network on examples of both sea lions of all types as well as on sections of the images that didn't pertain to sea lions. On our test data, we achieved a 10\% error rate whereas on the raw images themselves, we had around 40\% error rate. Our network consisted of three convolution layers, each paired with a pooling layer, and two hidden layers with 256 and 128 neurons respectively.
+\end{abstract}
+
+% motivates and describes the problem and the results at a high level.
+\section{Introduction}
+Currently, the NOAA has to employ technichions 
+
+% briefly describes existing work that solves the same (or similar) problem
+\section{Related Works}
+Similar projects have been undertaken to solve more general image recognition problems, such as solving the IMAGE-NET 
+
+% explains any background information necessary to understand the problem or your approach.
+\section{Background}
+A convolutional neural network is a neural network the uses convolutional layers to increase the amount of data taken in and 
+
+% provides the details of how you constructed your system, how it works, and how you tailored the algorithms described in the previous section to the problem at hand.
+\section{System Description}
+The network is composed of three convolution layers which are followed by pooling layers. This section provides our network with image transformations that have been proven to work well in generalizing images regradless of their 
+
+
+% describes how well the system performs. A format that often works well here is to first explain your evaluation techniques, provide their results, and then explain those results and what they say about the problem and about your approach(es) to it.
+\section{Results}
+
+
+% usually very brief, in which you can summarize your system and the results. In addition, this is a chance to be less scientific in your opinions about the project and a chance to put it in the larger context of larger, more general problems (such as the general vision problem or a broad subfield).
+\section{Conclusion}
+
+
+\end{document}
