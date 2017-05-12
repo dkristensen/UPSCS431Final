@@ -137,8 +137,8 @@ def imageArrayToTensor(array):
     b = []
     counter = 1
     for i in array:
-        if(counter%int(len(array)/10) == 0):
-            print(".", end = "")
+        # if(counter%int(len(array)/10) == 0):
+        #     print(".", end = "")
         img = i.convert('RGB')
         x = numpy.asarray(img, dtype='float32')
         # x = numpy.expand_dims(x, axis=0)

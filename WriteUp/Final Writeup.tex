@@ -37,7 +37,7 @@ Currently, the NOAA has to employ technicians to enumerate and categorize the se
 
 % briefly describes existing work that solves the same (or similar) problem
 \section{Related Works}
-Similar projects have been undertaken to solve more general image recognition problems, such as competing in the ILSVRC competition in 2012 to achieve first place in image recognition across 1000 classes.
+Similar projects have been undertaken to solve more general image recognition problems, such as competing in the ILSVRC competition in 2012 to achieve first place in image recognition across 1000 classes. This project, which was undertaken in Krizhevsky, Sutskever, and Hinton, of the University of Toronto in 2012, inspired the basic sturcture of our intial structure of our network, as we hoped to use the success in classifying the wider problem in our paired down problem.
 
 % explains any background information necessary to understand the problem or your approach.
 \section{Background}
@@ -53,10 +53,12 @@ We trained our network on both the small and a portion of the large dataset that
 
 % describes how well the system performs. A format that often works well here is to first explain your evaluation techniques, provide their results, and then explain those results and what they say about the problem and about your approach(es) to it.
 \section{Results}
+Our network achieved 91\% accuracy on our test set, which was the accuracy we had been hoping for. For this measure, we checked how many accurately the network could separate the two classes after training, however, the images that composed the test set were also 64x64 images that were either centered on a sea lion or completely lacked a sea lion. This caused our network to report a much higher accuracy than it could perform on real world example, as we weren't searching through each pixel to evaluate whether or not it had a sea lion. While we lacked the time and forethought to write a numerical function that evaluated our accuracy on a whole image, by observation, we found that we were typically around 80\% precision on the sea lions, but only 50\% accuracy. From an entire image, we would usually get about half of our signaled positives on the terrain, marking false positives.
+Given that our network was only trained on the smaller of the two datasets, the network struggled with slides where the terrain was sea lion colored (brownish) and had some aspect of shadow running across the image. We had hoped to remedy this problem by using the larger dataset of the two, but given our internet speeds and hard drive space on our machines, it became unfeasible, as the larger file was 98 gigabytes compared to the smaller 98 megabytes. Furthermore, since we had not written a function that would evaluate the image as a whole, working a function that does this into the evaluation phase my have proved beneficial, as it could give us a more accurate measure of our performance on the actual examples we would be working on.
 
 
 % usually very brief, in which you can summarize your system and the results. In addition, this is a chance to be less scientific in your opinions about the project and a chance to put it in the larger context of larger, more general problems (such as the general vision problem or a broad subfield).
 \section{Conclusion}
-
+Overall, we believe this was a successful start to a larger project. With what we know now, we believe we could more successful with both our structure and our resources. What this project is a step towards is improving general image classification problems, as the difficulty comes from identifying objects that blend in extremely well with their surroundings. We hope to continue this project to both improve our experience with machine learning approaches and improve the abilities of our project.
 
 \end{document}
